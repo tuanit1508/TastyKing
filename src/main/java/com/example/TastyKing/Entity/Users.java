@@ -23,22 +23,22 @@ public class Users {
  @Column(name = "UserID")
  int userId;
 
- @Column(name = "fullname", nullable = false, length = 255)
+ @Column(name = "fullname", length = 255)
  String fullName;
 
- @Column(name = "username", nullable = false, length = 50)
+ @Column(name = "username", length = 50)
 String userName;
 
- @Column(name = "email", nullable = false, length = 100)
+ @Column(name = "email", length = 100)
 String email;
 
- @Column(name = "phone", nullable = false, length = 15)
+ @Column(name = "phone", length = 15)
  String phone;
 
- @Column(name = "password", nullable = false, length = 255)
+ @Column(name = "password", length = 255)
  String password;
 
- @Column(name = "role", nullable = false, length = 50)
+ @Column(name = "role", length = 50)
  String role;
 
  @Column(name = "active")
