@@ -1,33 +1,40 @@
-CReate database TastyKing
+Create database TastyKing
 USE TastyKing
-CREATE TABLE Users (
+CREATE TABLE users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
-    FullName VARCHAR(255) NOT NULL,
-    UserName VARCHAR(50) NOT NULL,
-    Email VARCHAR(100) NOT NULL,
-    Phone VARCHAR(15) NOT NULL,
-    Password VARCHAR(255) NOT NULL,
-    Role int NOT NULL,
+    FullName VARCHAR(255) ,
+    UserName VARCHAR(50) ,
+    Email VARCHAR(100) ,
+    Phone VARCHAR(15) ,
+    Password VARCHAR(255) ,
+    Role VARCHAR(50) ,
     Active boolean,
     Otp varchar(10),
     GenerateOtpTime DATETIME
    
 );
-CREATE TABLE RewardPoint(
+
+
+CREATE TABLE rewardpoint(
     RewardPointID INT AUTO_INCREMENT PRIMARY KEY,
     UserID INT NOT NULL,
     Balance FLOAT NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    FOREIGN KEY (UserID) REFERENCES users(UserID)
 );
-CREATE TABLE Slide (
+CREATE TABLE slide (
     SlideID INT AUTO_INCREMENT PRIMARY KEY,
     UserID INT NOT NULL,
     Image VARCHAR(500) NOT NULL,
     SlidePosition INT NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES Users(userID)
+    FOREIGN KEY (UserID) REFERENCES users(userID)
 );
-
-CREATE TABLE Voucher (
+CREATE TABLE review(
+	ReviewID INT AUTO_INCREMENT PRIMARY KEY,
+	UserID INT NOT NULL,
+	ReviewText VARCHAR(5000),
+	RewiewDate DATETIME
+);
+CREATE TABLE voucher (
     VoucherID INT AUTO_INCREMENT PRIMARY KEY,
     VoucherName NVARCHAR(100) NOT NULL,
     PointValue INT NOT NULL,
@@ -38,26 +45,26 @@ CREATE TABLE Voucher (
     VoucherImage varchar(1000),
 	VoucherDescribe nvarchar(2000)
 );
-CREATE TABLE VoucherExchange (
+CREATE TABLE voucherexchange (
     VoucherExchangeID INT AUTO_INCREMENT PRIMARY KEY,
     UserID INT NOT NULL,
     VoucherID INT NOT NULL,
     ExchangeDate DATE NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID),
-    FOREIGN KEY (VoucherID) REFERENCES Voucher(VoucherID)
+    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (VoucherID) REFERENCES voucher(VoucherID)
 );
-CREATE TABLE TablePosition (
+CREATE TABLE tableposition (
     TablePositionID INT AUTO_INCREMENT PRIMARY KEY,
     Position NVARCHAR(50) NOT NULL
 );
-CREATE TABLE Tables (
+CREATE TABLE tables (
     TableID INT AUTO_INCREMENT PRIMARY KEY,
     TablePositionID INT NOT NULL,
     TableStatus NVARCHAR(50) NOT NULL,
     TableAmount INT NOT NULL,
-    FOREIGN KEY (TablePositionID) REFERENCES TablePosition(TablePositionID)
+    FOREIGN KEY (TablePositionID) REFERENCES tableposition(TablePositionID)
 );
-CREATE TABLE Orders (
+CREATE TABLE orders (
     OrderID INT AUTO_INCREMENT PRIMARY KEY,
     UserID INT NOT NULL,
     TableID INT NOT NULL,
@@ -66,14 +73,14 @@ CREATE TABLE Orders (
     TotalAmount DECIMAL(18, 2) NOT NULL,
     Note NVARCHAR(2000) NOT NULL,
     NumberOfCustomer int ,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID),
-    FOREIGN KEY (TableID) REFERENCES Tables(TableID)
+    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (TableID) REFERENCES tables(TableID)
 );
-CREATE TABLE Category (
+CREATE TABLE category (
     CategoryID INT AUTO_INCREMENT PRIMARY KEY,
     CategoryName VARCHAR(100) NOT NULL
 );
-CREATE TABLE Food (
+CREATE TABLE food (
     FoodID INT AUTO_INCREMENT PRIMARY KEY,
     CategoryID INT NOT NULL,
     FoodName NVARCHAR(255) NOT NULL,
@@ -82,9 +89,9 @@ CREATE TABLE Food (
     Description NVARCHAR(10000) NULL,
     Unit NVARCHAR(50) NOT NULL,
 	FoodImage Nvarchar(10000) not null,
-    FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID)
+    FOREIGN KEY (CategoryID) REFERENCES category(CategoryID)
 );
-CREATE TABLE Combo (
+CREATE TABLE combo (
     ComboID INT AUTO_INCREMENT PRIMARY KEY,
     
     OldPrice DECIMAL(18, 2) NOT NULL,
@@ -95,16 +102,16 @@ CREATE TABLE Combo (
     ComboDescription NVARCHAR(10000) NULL
     
 );
-CREATE TABLE Combo_Food (
+CREATE TABLE combofood (
     ComboID INT,
     FoodID INT,
     Quantity int,
     PRIMARY KEY (ComboID, FoodID),
-    FOREIGN KEY (ComboID) REFERENCES Combo(ComboID),
-    FOREIGN KEY (FoodID) REFERENCES Food(FoodID)
+    FOREIGN KEY (ComboID) REFERENCES combo(ComboID),
+    FOREIGN KEY (FoodID) REFERENCES food(FoodID)
 );
 
-CREATE TABLE OrderDetail (
+CREATE TABLE orderdetail (
     OrderDetailID INT AUTO_INCREMENT PRIMARY KEY,
     OrderID INT NOT NULL,
     FoodID INT NOT NULL,
@@ -114,19 +121,19 @@ CREATE TABLE OrderDetail (
  	 NumberPhone NVARCHAR(15) NOT NULL,
 	TotalPrice DECIMAL(18, 2) NOT NULL,
     Quantity INT NOT NULL,
-	 FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
-    FOREIGN KEY (FoodID) REFERENCES Food(FoodID)
+	 FOREIGN KEY (OrderID) REFERENCES orders(OrderID),
+    FOREIGN KEY (FoodID) REFERENCES food(FoodID)
     
 );
-CREATE TABLE Bill(
+CREATE TABLE bill(
     BillID INT AUTO_INCREMENT PRIMARY KEY,
     OrderID INT NOT NULL,
     BillStatus NVARCHAR(50) NOT NULL,
     BillReleaseDate DATETIME NOT NULL,
     
-    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+    FOREIGN KEY (OrderID) REFERENCES orders(OrderID)
 );
-CREATE TABLE Payment (
+CREATE TABLE payment (
     PaymentID INT AUTO_INCREMENT PRIMARY KEY,
     UserID INT NOT NULL,
     BillID INT NOT NULL,
@@ -135,8 +142,14 @@ CREATE TABLE Payment (
     PaymentType NVARCHAR(50) NOT NULL,
     PaymentStatus NVARCHAR(50) NOT NULL,
     PaymentDate DATETIME NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID),
-    FOREIGN KEY (BillID) REFERENCES Bill(BillID),
-    FOREIGN KEY (VoucherID) REFERENCES Voucher(VoucherID)
+    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (BillID) REFERENCES bill(BillID),
+    FOREIGN KEY (VoucherID) REFERENCES voucher(VoucherID)
 );
+
+
+
+
+
+
 
