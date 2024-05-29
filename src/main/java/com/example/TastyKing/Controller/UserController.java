@@ -34,7 +34,8 @@ public class UserController {
         }
     }
     @PutMapping("/regenerate-otp")
-    public ResponseEntity<String> regenerateOtp(@RequestParam("email") String email) {
+    public ResponseEntity<String> regenerateOtp(@RequestParam String email) {
+        System.out.println("Email received: " + email); // Debug log
         return new ResponseEntity<>(userService.regenerateOtp(email), HttpStatus.OK);
     }
 

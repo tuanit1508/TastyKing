@@ -16,5 +16,5 @@ public class UserResponse {
     String fullName;
     String email;
     String phone;
-    Set<String> role;
+    String role;
 }
