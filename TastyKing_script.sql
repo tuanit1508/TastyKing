@@ -65,9 +65,13 @@ CREATE TABLE orders (
     TableID INT NOT NULL,
     Status NVARCHAR(50) NOT NULL,
     OrderDate DATE NOT NULL,
-    TotalAmount DECIMAL(18, 2) NOT NULL,
-    Note NVARCHAR(2000) NOT NULL,
+    TotalAmount DECIMAL(18, 2) ,
+    Note NVARCHAR(2000),
     NumberOfCustomer int ,
+     NumberPhone NVARCHAR(15) NOT NULL,
+    CustomerName NVARCHAR(100) NOT NULL,
+    Date DATE NOT NULL,
+    Time TIME NOT NULL,
     FOREIGN KEY (UserID) REFERENCES users(UserID),
     FOREIGN KEY (TableID) REFERENCES tables(TableID)
 );
@@ -118,11 +122,8 @@ CREATE TABLE orderdetail (
     OrderDetailID INT AUTO_INCREMENT PRIMARY KEY,
     OrderID INT NOT NULL,
     FoodID INT NOT NULL,
-    CustomerName NVARCHAR(100) NOT NULL,
-    Date DATE NOT NULL,
-    Time TIME NOT NULL,
- 	 NumberPhone NVARCHAR(15) NOT NULL,
-	TotalPrice DECIMAL(18, 2) NOT NULL,
+ 	
+	TotalPrice DECIMAL(18, 2),
     Quantity INT NOT NULL,
 	 FOREIGN KEY (OrderID) REFERENCES orders(OrderID),
     FOREIGN KEY (FoodID) REFERENCES food(FoodID)
