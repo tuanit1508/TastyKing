@@ -28,14 +28,7 @@ CREATE TABLE slide (
     SlidePosition INT NOT NULL,
     FOREIGN KEY (UserID) REFERENCES users(userID)
 );
-CREATE TABLE review(
-	ReviewID INT AUTO_INCREMENT PRIMARY KEY,
-	UserID INT NOT NULL,
-	FoodID INT not null,
-	ReviewText VARCHAR(5000),
-	RewiewDate DATETIME,
-	FOREIGN KEY (FoodID) REFERENCES food(FoodIDID)
-);
+
 CREATE TABLE voucher (
     VoucherID INT AUTO_INCREMENT PRIMARY KEY,
     VoucherName NVARCHAR(100) NOT NULL,
@@ -92,6 +85,14 @@ CREATE TABLE food (
     Unit NVARCHAR(50) NOT NULL,
 	FoodImage Nvarchar(10000) not null,
     FOREIGN KEY (CategoryID) REFERENCES category(CategoryID)
+);
+CREATE TABLE review(
+	ReviewID INT AUTO_INCREMENT PRIMARY KEY,
+	UserID INT NOT NULL,
+	FoodID INT not null,
+	ReviewText VARCHAR(5000),
+	RewiewDate DATETIME,
+	FOREIGN KEY (FoodID) REFERENCES food(FoodIDID)
 );
 CREATE TABLE combo (
     ComboID INT AUTO_INCREMENT PRIMARY KEY,
