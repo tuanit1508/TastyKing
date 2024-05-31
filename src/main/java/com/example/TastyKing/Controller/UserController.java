@@ -6,6 +6,7 @@ import com.example.TastyKing.Dto.Request.RegisterRequest;
 import com.example.TastyKing.Dto.Response.ApiResponse;
 import com.example.TastyKing.Dto.Response.UserResponse;
 import com.example.TastyKing.Service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest request){
+    public ResponseEntity<String> register(@RequestBody @Valid RegisterRequest request){
             return new ResponseEntity<>(userService.createNewUser(request),  HttpStatus.OK);
     }
     @PutMapping("/verify-account")
