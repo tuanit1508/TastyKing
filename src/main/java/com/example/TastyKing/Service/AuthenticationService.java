@@ -24,7 +24,6 @@ import java.util.StringJoiner;
 
 @Service
 @RequiredArgsConstructor
-
 public class AuthenticationService {
     @Autowired
     private UserRepository userRepository;
