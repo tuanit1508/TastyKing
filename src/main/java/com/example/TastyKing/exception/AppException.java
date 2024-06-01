@@ -1,4 +1,4 @@
-package com.example.TastyKing.Exception;
+package com.example.TastyKing.exception;
 
 public class AppException extends RuntimeException{
     private ErrorCode errorCode;

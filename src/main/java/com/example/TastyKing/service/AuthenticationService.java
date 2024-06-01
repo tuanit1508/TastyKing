@@ -1,11 +1,11 @@
-package com.example.TastyKing.Service;
+package com.example.TastyKing.service;
 
-import com.example.TastyKing.Dto.Request.AuthenticationRequest;
-import com.example.TastyKing.Dto.Response.AuthenticationResponse;
-import com.example.TastyKing.Entity.Users;
-import com.example.TastyKing.Exception.AppException;
-import com.example.TastyKing.Exception.ErrorCode;
-import com.example.TastyKing.Repository.UserRepository;
+import com.example.TastyKing.dto.request.AuthenticationRequest;
+import com.example.TastyKing.dto.response.AuthenticationResponse;
+import com.example.TastyKing.entity.User;
+import com.example.TastyKing.exception.AppException;
+import com.example.TastyKing.exception.ErrorCode;
+import com.example.TastyKing.repository.UserRepository;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
@@ -25,7 +25,7 @@ public class AuthenticationService {
     protected static final String signature ="8UJijdAgFeqP7UReJU3e+cCQcVPnW1cK/JxPC0+CUnoo5h36rd3QicT7nPBhbtBW";
     private PasswordEncoder passwordEncoder;
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest){
-        Users user = userRepository.findByEmail(authenticationRequest.getEmail()).orElseThrow(
+        User user = userRepository.findByEmail(authenticationRequest.getEmail()).orElseThrow(
                 () -> new AppException(ErrorCode.EMAIL_NOT_EXISTED)
 
         );
@@ -39,7 +39,7 @@ public class AuthenticationService {
 
     }
 
-    private String generateToken(Users user) {
+    private String generateToken(User user) {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                 .subject(user.getUserName())

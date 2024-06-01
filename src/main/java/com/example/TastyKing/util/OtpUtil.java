@@ -1,4 +1,4 @@
-package com.example.TastyKing.Util;
+package com.example.TastyKing.util;
 
 import org.springframework.stereotype.Component;
 

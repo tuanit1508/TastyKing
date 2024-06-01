@@ -1,11 +1,10 @@
-package com.example.TastyKing.Entity;
+package com.example.TastyKing.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -16,7 +15,7 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 @Table(name = "users")
-public class Users {
+public class User {
 
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)

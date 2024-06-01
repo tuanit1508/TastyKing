@@ -1,4 +1,4 @@
-package com.example.TastyKing.Dto.Response;
+package com.example.TastyKing.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

@@ -1,6 +1,6 @@
 Create database TastyKing
 USE TastyKing
-CREATE TABLE users (
+CREATE TABLE user (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     FullName VARCHAR(255) ,
     UserName VARCHAR(50) ,
@@ -19,14 +19,14 @@ CREATE TABLE rewardpoint(
     RewardPointID INT AUTO_INCREMENT PRIMARY KEY,
     UserID INT NOT NULL,
     Balance FLOAT NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES users(UserID)
+    FOREIGN KEY (UserID) REFERENCES user(UserID)
 );
 CREATE TABLE slide (
     SlideID INT AUTO_INCREMENT PRIMARY KEY,
     UserID INT NOT NULL,
     Image VARCHAR(500) NOT NULL,
     SlidePosition INT NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES users(userID)
+    FOREIGN KEY (UserID) REFERENCES user(userID)
 );
 
 CREATE TABLE voucher (
@@ -45,7 +45,7 @@ CREATE TABLE voucherexchange (
     UserID INT NOT NULL,
     VoucherID INT NOT NULL,
     ExchangeDate DATE NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (UserID) REFERENCES user(UserID),
     FOREIGN KEY (VoucherID) REFERENCES voucher(VoucherID)
 );
 CREATE TABLE tableposition (
@@ -72,7 +72,7 @@ CREATE TABLE orders (
     CustomerName NVARCHAR(100) NOT NULL,
     Date DATE NOT NULL,
     Time TIME NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (UserID) REFERENCES user(UserID),
     FOREIGN KEY (TableID) REFERENCES tables(TableID)
 );
 CREATE TABLE category (
@@ -146,7 +146,7 @@ CREATE TABLE payment (
     PaymentType NVARCHAR(50) NOT NULL,
     PaymentStatus NVARCHAR(50) NOT NULL,
     PaymentDate DATETIME NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (UserID) REFERENCES user(UserID),
     FOREIGN KEY (BillID) REFERENCES bill(BillID),
     FOREIGN KEY (VoucherID) REFERENCES voucher(VoucherID)
 );

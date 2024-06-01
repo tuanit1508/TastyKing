@@ -1,11 +1,9 @@
-package com.example.TastyKing.Controller;
+package com.example.TastyKing.controller;
 
 
-import com.example.TastyKing.Dto.Request.OtpRequest;
-import com.example.TastyKing.Dto.Request.RegisterRequest;
-import com.example.TastyKing.Dto.Response.ApiResponse;
-import com.example.TastyKing.Dto.Response.UserResponse;
-import com.example.TastyKing.Service.UserService;
+import com.example.TastyKing.dto.request.OtpRequest;
+import com.example.TastyKing.dto.request.RegisterRequest;
+import com.example.TastyKing.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

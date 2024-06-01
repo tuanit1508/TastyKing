@@ -1,4 +1,4 @@
-package com.example.TastyKing.Enum;
+package com.example.TastyKing.enums;
 
 public enum Role {
     ADMIN,

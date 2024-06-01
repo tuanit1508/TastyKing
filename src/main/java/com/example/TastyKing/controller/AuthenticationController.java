@@ -1,9 +1,9 @@
-package com.example.TastyKing.Controller;
+package com.example.TastyKing.controller;
 
-import com.example.TastyKing.Dto.Request.AuthenticationRequest;
-import com.example.TastyKing.Dto.Response.ApiResponse;
-import com.example.TastyKing.Dto.Response.AuthenticationResponse;
-import com.example.TastyKing.Service.AuthenticationService;
+import com.example.TastyKing.dto.request.AuthenticationRequest;
+import com.example.TastyKing.dto.response.ApiResponse;
+import com.example.TastyKing.dto.response.AuthenticationResponse;
+import com.example.TastyKing.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

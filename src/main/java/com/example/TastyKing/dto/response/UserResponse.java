@@ -1,10 +1,7 @@
-package com.example.TastyKing.Dto.Response;
+package com.example.TastyKing.dto.response;
 
-import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.Set;
 
 @Data
 @Builder

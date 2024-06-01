@@ -1,15 +1,15 @@
-package com.example.TastyKing.Service;
+package com.example.TastyKing.service;
 
-import com.example.TastyKing.Dto.Request.RegisterRequest;
-import com.example.TastyKing.Dto.Response.UserResponse;
-import com.example.TastyKing.Entity.Users;
-import com.example.TastyKing.Enum.Role;
-import com.example.TastyKing.Exception.AppException;
-import com.example.TastyKing.Exception.ErrorCode;
-import com.example.TastyKing.Mapper.UserMapper;
-import com.example.TastyKing.Repository.UserRepository;
-import com.example.TastyKing.Util.EmailUtil;
-import com.example.TastyKing.Util.OtpUtil;
+import com.example.TastyKing.dto.request.RegisterRequest;
+import com.example.TastyKing.dto.response.UserResponse;
+import com.example.TastyKing.entity.User;
+import com.example.TastyKing.enums.Role;
+import com.example.TastyKing.exception.AppException;
+import com.example.TastyKing.exception.ErrorCode;
+import com.example.TastyKing.mapper.UserMapper;
+import com.example.TastyKing.repository.UserRepository;
+import com.example.TastyKing.util.EmailUtil;
+import com.example.TastyKing.util.OtpUtil;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,7 +42,7 @@ public class UserService {
         } catch (MessagingException e) {
             throw new RuntimeException("Unable to send otp please try again");
         }
-        Users user = new Users();
+        User user = new User();
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         user.setRole(Role.USER.name());
@@ -59,7 +59,7 @@ public class UserService {
 
     public boolean verifyOtp(String email, String otp) {
 
-    Users user = userRepository.findByEmail(email).orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXISTED));
+    User user = userRepository.findByEmail(email).orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXISTED));
         if (user.getOtp().equals(otp) &&
                 Duration.between(user.getGenerateOtpTime(), LocalDateTime.now()).getSeconds() < 60) {
             user.setActive(true);
@@ -69,7 +69,7 @@ public class UserService {
         return false;
     }
     public String regenerateOtp(String email) {
-        Users user = userRepository.findByEmail(email).orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXISTED));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXISTED));
         String otp = otpUtil.generateOtp();
         try {
             emailUtil.sendOtpEmail(email, otp);

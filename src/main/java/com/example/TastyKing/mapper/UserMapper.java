@@ -1,12 +1,12 @@
-package com.example.TastyKing.Mapper;
+package com.example.TastyKing.mapper;
 
-import com.example.TastyKing.Dto.Request.RegisterRequest;
-import com.example.TastyKing.Dto.Response.UserResponse;
-import com.example.TastyKing.Entity.Users;
+import com.example.TastyKing.dto.request.RegisterRequest;
+import com.example.TastyKing.dto.response.UserResponse;
+import com.example.TastyKing.entity.User;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    Users toUser(RegisterRequest request);
-    UserResponse toUserResponse(Users user);
+    User toUser(RegisterRequest request);
+    UserResponse toUserResponse(User user);
 }

@@ -1,7 +1,6 @@
-package com.example.TastyKing.Dto.Request;
+package com.example.TastyKing.dto.request;
 
 
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

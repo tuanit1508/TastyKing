@@ -1,4 +1,4 @@
-package com.example.TastyKing.Configuration;
+package com.example.TastyKing.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
