@@ -13,7 +13,9 @@ CREATE TABLE users (
     GenerateOtpTime DATETIME
    
 );
-
+ALTER TABLE users
+ADD Provider VARCHAR(50),
+ADD ProviderId varchar(100);
 
 CREATE TABLE rewardpoint(
     RewardPointID INT AUTO_INCREMENT PRIMARY KEY,
