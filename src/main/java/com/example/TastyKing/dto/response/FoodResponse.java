@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class FoodResponse {
+    private Long foodID;
     private Category category;
 
 

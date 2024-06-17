@@ -2,11 +2,13 @@ package com.example.TastyKing.service;
 
 import com.example.TastyKing.dto.request.RegisterRequest;
 import com.example.TastyKing.dto.response.UserResponse;
+import com.example.TastyKing.entity.RewardPoint;
 import com.example.TastyKing.entity.User;
 import com.example.TastyKing.enums.Role;
 import com.example.TastyKing.exception.AppException;
 import com.example.TastyKing.exception.ErrorCode;
 import com.example.TastyKing.mapper.UserMapper;
+import com.example.TastyKing.repository.RewardPointRepository;
 import com.example.TastyKing.repository.UserRepository;
 import com.example.TastyKing.util.EmailUtil;
 import com.example.TastyKing.util.OtpUtil;
@@ -31,6 +33,8 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RewardPointRepository rewardPointRepository;
 
     public String createNewUser(RegisterRequest request) {
         if(userRepository.existsByEmail(request.getEmail()))
@@ -64,6 +68,10 @@ public class UserService {
                 Duration.between(user.getGenerateOtpTime(), LocalDateTime.now()).getSeconds() < 60) {
             user.setActive(true);
             userRepository.save(user);
+            RewardPoint rewardPoint = new RewardPoint();
+            rewardPoint.setUser(user);
+            rewardPoint.setBalance(0.0);
+            rewardPointRepository.save(rewardPoint);
             return true;
         }
         return false;

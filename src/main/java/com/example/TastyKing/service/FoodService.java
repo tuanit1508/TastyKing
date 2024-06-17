@@ -2,6 +2,7 @@ package com.example.TastyKing.service;
 
 
 import com.example.TastyKing.dto.request.FoodRequest;
+import com.example.TastyKing.dto.request.UpdateFoodRequest;
 import com.example.TastyKing.dto.response.FoodResponse;
 import com.example.TastyKing.entity.Category;
 import com.example.TastyKing.entity.Food;
@@ -10,6 +11,7 @@ import com.example.TastyKing.exception.ErrorCode;
 import com.example.TastyKing.mapper.FoodMapper;
 import com.example.TastyKing.repository.CategoryRepository;
 import com.example.TastyKing.repository.FoodRepository;
+import com.example.TastyKing.request.FoodUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +53,29 @@ public class FoodService {
             return foods.stream()
                     .map(foodMapper::toFoodResponse)
                     .collect(Collectors.toList());
+        }
+        public String deleteFood(Long foodID){
+            foodRepository.deleteById(foodID);
+            return "Deleted successfull";
+        }
+        public FoodResponse updateFood(Long foodID, UpdateFoodRequest request) {
+            Food food = foodRepository.findById(foodID).orElseThrow(() ->
+                    new AppException(ErrorCode.FOOD_NOT_EXIST));
+            Category category = categoryRepository.findById(request.getCategory().getCategoryID())
+                    .orElseThrow(() -> new AppException(ErrorCode.CATEGORY_NOT_EXIST));
+            food.setCategory(category);
+            food.setFoodName(request.getFoodName());
+            food.setFoodCost(request.getFoodCost());
+            food.setFoodImage(request.getFoodImage());
+            food.setDescription(request.getDescription());
+            food.setFoodPrice(request.getFoodPrice());
+            food.setUnit(request.getUnit());
+           Food updateFood= foodRepository.save(food);
+           return foodMapper.toFoodResponse(updateFood);
+        }
+        public FoodResponse getFoodByFoodID(Long foodID){
+           Food food = foodRepository.findById(foodID).orElseThrow(() ->
+                   new AppException(ErrorCode.FOOD_NOT_EXIST));
+           return foodMapper.toFoodResponse(food);
         }
     }

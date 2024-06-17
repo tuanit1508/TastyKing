@@ -1,6 +1,7 @@
 package com.example.TastyKing.dto.request;
 
 import com.example.TastyKing.entity.Category;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,10 +18,10 @@ public class FoodRequest {
 
     private String foodName;
 
-
+    @DecimalMin(value = "0.0", inclusive = false, message = "PRICE_INVALID")
     private Double foodPrice;
 
-
+    @DecimalMin(value = "0.0", inclusive = false, message = "PRICE_INVALID")
     private Double foodCost;
 
 

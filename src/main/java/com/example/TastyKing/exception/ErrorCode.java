@@ -14,7 +14,9 @@ public enum ErrorCode {
     UNAUTHENTICATED(1008,"Unauthenticated", HttpStatus.UNAUTHORIZED),
 
     CATEGORY_NOT_EXIST(1009,"Category not exist" ,HttpStatus.BAD_REQUEST ),
-    CATEGORY_EXISTED(1010,"Category has existed" ,HttpStatus.BAD_REQUEST );
+    CATEGORY_EXISTED(1010,"Category has existed" ,HttpStatus.BAD_REQUEST ),
+    FOOD_NOT_EXIST(1011,"Food not exist",HttpStatus.BAD_REQUEST),
+    PRICE_INVALID(1012, "Price must be greater than 0", HttpStatus.BAD_REQUEST);
 
     private int code;
     private String message;

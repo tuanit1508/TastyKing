@@ -9,6 +9,6 @@ import lombok.experimental.FieldDefaults;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryResponse {
+    private Long categoryID;
     String categoryName;
-
 }

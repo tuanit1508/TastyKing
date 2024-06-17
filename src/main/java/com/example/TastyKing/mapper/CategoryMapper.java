@@ -1,6 +1,7 @@
 package com.example.TastyKing.mapper;
 
 import com.example.TastyKing.dto.request.CategoryRequest;
+import com.example.TastyKing.dto.request.UpdateCategoryRequest;
 import com.example.TastyKing.dto.response.CategoryResponse;
 import com.example.TastyKing.entity.Category;
 import org.mapstruct.Mapper;
@@ -9,4 +10,7 @@ import org.mapstruct.Mapper;
 public interface CategoryMapper {
     Category toCategory(CategoryRequest request);
     CategoryResponse toCategoryResponse(Category category);
+
+
 }
+

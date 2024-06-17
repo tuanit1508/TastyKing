@@ -1,6 +1,7 @@
 package com.example.TastyKing.controller;
 
 import com.example.TastyKing.dto.request.CategoryRequest;
+import com.example.TastyKing.dto.request.UpdateCategoryRequest;
 import com.example.TastyKing.dto.response.ApiResponse;
 import com.example.TastyKing.dto.response.CategoryResponse;
 import com.example.TastyKing.service.CategoryService;
@@ -28,6 +29,18 @@ public class CategoryController {
     ApiResponse<List<CategoryResponse>> getAllCategory(){
         return ApiResponse.<List<CategoryResponse>>builder()
                 .result(categoryService.getAllCategory())
+                .build();
+    }
+    @DeleteMapping("/{categoryID}")
+ApiResponse<String>deleteCategory(@PathVariable Long categoryID){
+    return ApiResponse.<String>builder()
+            .result(categoryService.deleteCategory(categoryID))
+            .build();
+    }
+    @PutMapping("/{categoryID}")
+    ApiResponse<CategoryResponse> updateCategory(@PathVariable Long categoryID, @RequestBody UpdateCategoryRequest request){
+        return  ApiResponse.<CategoryResponse>builder()
+                .result(categoryService.updateCategory(categoryID,request))
                 .build();
     }
 }

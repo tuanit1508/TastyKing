@@ -22,7 +22,7 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SercurityConfig {
-    private final String[] PUBLIC_ENDPOINTS ={"/users/register","/users/verify-account", "/auth/login"};
+    private final String[] PUBLIC_ENDPOINTS ={"/users/register","/users/verify-account", "/users/regenerate-otp","/auth/login", "/category", "/food", "/food/{categoryID}", "/food/getFood/{foodID}"};
 
     private String signature ="OG3aRIYXHjOowyfI2MOHbl8xSjoF/B/XwkK6b276SfXAhL3KbizWWuT8LB1YUVvh";
 
@@ -31,6 +31,7 @@ public class SercurityConfig {
         httpSecurity.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS)
                         .permitAll()
                         .requestMatchers(HttpMethod.PUT, PUBLIC_ENDPOINTS).permitAll()
+                        .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS).permitAll()
 
                         .anyRequest()
                         .authenticated()

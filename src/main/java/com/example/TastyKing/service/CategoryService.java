@@ -1,6 +1,7 @@
 package com.example.TastyKing.service;
 
 import com.example.TastyKing.dto.request.CategoryRequest;
+import com.example.TastyKing.dto.request.UpdateCategoryRequest;
 import com.example.TastyKing.dto.response.CategoryResponse;
 import com.example.TastyKing.entity.Category;
 import com.example.TastyKing.exception.AppException;
@@ -36,4 +37,16 @@ public class CategoryService {
         return categorys.stream().map(categoryMapper::toCategoryResponse).toList();
     }
 
+    public String deleteCategory(Long categoryID) {
+        categoryRepository.deleteById(categoryID);
+        return "Deleted successfull";
+    }
+    public CategoryResponse updateCategory(Long categoryID, UpdateCategoryRequest request){
+        Category category = categoryRepository.findById(categoryID).orElseThrow(() ->
+                new AppException(ErrorCode.CATEGORY_NOT_EXIST));
+
+        category.setCategoryName(request.getCategoryName());
+        Category updatedCtegory = categoryRepository.save(category);
+        return categoryMapper.toCategoryResponse(updatedCtegory);
+    }
 }
