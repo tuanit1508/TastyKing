@@ -46,7 +46,7 @@ public class AuthenticationService {
     private String generateToken(User user) {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-                .subject(user.getUserName())
+                .subject(user.getEmail())
                 .issuer("TastyKing.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()))
@@ -62,7 +62,7 @@ public class AuthenticationService {
     }
     public String buildScope(User user) {
         if (!StringUtils.isEmpty(user.getRole())) {
-            return "ROLE_" + user.getRole();
+            return "" + user.getRole();
         }
         return "";
 

@@ -1,6 +1,5 @@
 package com.example.TastyKing.dto.request;
 
-
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -10,14 +9,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RegisterRequest {
-
-
-    String fullName;
-    String email;
+public class ChangePasswordRequest {
     @Size(min = 8, message = "PASSWORD_INVALID")
-    String password;
-    @Size(min = 10, message = "PHONE_INVALID")
-    String phone;
+    String newPass;
 
 }

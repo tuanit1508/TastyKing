@@ -7,11 +7,12 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+
 public class UserResponse {
-    String userName;
-    String fullName;
-    String email;
-    String phone;
-    String role;
+
+   private String userName;
+   private String fullName;
+   private String email;
+   private String phone;
+   private String role;
 }

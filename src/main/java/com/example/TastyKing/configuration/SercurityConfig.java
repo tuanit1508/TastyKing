@@ -1,5 +1,6 @@
 package com.example.TastyKing.configuration;
 
+import com.example.TastyKing.enums.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,7 +23,9 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SercurityConfig {
-    private final String[] PUBLIC_ENDPOINTS ={"/users/register","/users/verify-account", "/users/regenerate-otp","/auth/login", "/category", "/food", "/food/{categoryID}", "/food/getFood/{foodID}"};
+    private final String[] PUBLIC_ENDPOINTS ={"/users/register","/users/verify-account", "/users/sendOTP", "/users/verify-email",
+            "/users/regenerate-otp","/auth/login", "/category", "/food",
+            "/food/{categoryID}", "/food/getFood/{foodID}"};
 
     private String signature ="OG3aRIYXHjOowyfI2MOHbl8xSjoF/B/XwkK6b276SfXAhL3KbizWWuT8LB1YUVvh";
 
@@ -31,17 +34,20 @@ public class SercurityConfig {
         httpSecurity.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS)
                         .permitAll()
                         .requestMatchers(HttpMethod.PUT, PUBLIC_ENDPOINTS).permitAll()
-                        .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS).permitAll()
+                         .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS).permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/users/change-pass/{email}").permitAll()
+
 
                         .anyRequest()
                         .authenticated()
                 );
 
         httpSecurity.oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer -> {
-            httpSecurityOAuth2ResourceServerConfigurer.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())
+                    httpSecurityOAuth2ResourceServerConfigurer.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())
                             .jwtAuthenticationConverter(jwtAuthenticationConverter()))
                     .authenticationEntryPoint(new JwtAuthEntryPoint());
-        });
+
+                });
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
 
         return httpSecurity.build();
