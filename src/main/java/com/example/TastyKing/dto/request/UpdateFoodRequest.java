@@ -31,4 +31,6 @@ public class UpdateFoodRequest {
 
 
     private String foodImage;
+    private String foodImage2;
+    private String foodImage3;
 }

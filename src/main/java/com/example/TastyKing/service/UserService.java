@@ -124,6 +124,8 @@ public class UserService {
         Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return jwt.getClaim("sub"); // Assuming the email is stored in the "sub" claim
     }
+
+    @PostAuthorize("returnObject.email == principal.claims['sub'] or hasRole('ADMIN')")
     public UserResponse updateUser(String email, UpdateUserRequest request){
         User user = userRepository.findByEmail(email).orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXISTED));
         user.setUserName(request.getUserName());
@@ -134,6 +136,7 @@ public class UserService {
 
     }
 
+    @PostAuthorize("returnObject.email == principal.claims['sub']")
     public UserResponse updatePassword(String email, UpdatePasswordRequest request){
         User user = userRepository.findByEmail(email).orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXISTED));
         boolean passwordValid = passwordEncoder.matches(request.getOldPass(), user.getPassword());

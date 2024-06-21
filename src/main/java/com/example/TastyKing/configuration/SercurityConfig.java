@@ -25,7 +25,9 @@ import javax.crypto.spec.SecretKeySpec;
 public class SercurityConfig {
     private final String[] PUBLIC_ENDPOINTS ={"/users/register","/users/verify-account", "/users/sendOTP", "/users/verify-email",
             "/users/regenerate-otp","/auth/login", "/category", "/food",
-            "/food/{categoryID}", "/food/getFood/{foodID}"};
+            "/food/{categoryID}", "/food/getFood/{foodID}",
+            "/combo"
+    };
 
     private String signature ="OG3aRIYXHjOowyfI2MOHbl8xSjoF/B/XwkK6b276SfXAhL3KbizWWuT8LB1YUVvh";
 
@@ -36,6 +38,7 @@ public class SercurityConfig {
                         .requestMatchers(HttpMethod.PUT, PUBLIC_ENDPOINTS).permitAll()
                          .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.PUT, "/users/change-pass/{email}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/combo").permitAll()
 
 
                         .anyRequest()

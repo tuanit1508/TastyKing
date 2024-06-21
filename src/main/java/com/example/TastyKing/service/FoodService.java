@@ -14,6 +14,7 @@ import com.example.TastyKing.repository.FoodRepository;
 import com.example.TastyKing.request.FoodUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class FoodService {
 
 
 
-
+    @PreAuthorize("hasRole('ADMIN')")
         public FoodResponse addFood(FoodRequest foodRequest) {
             Food food = foodMapper.toFood(foodRequest);
             Category category = categoryRepository.findById(foodRequest.getCategory().getCategoryID())

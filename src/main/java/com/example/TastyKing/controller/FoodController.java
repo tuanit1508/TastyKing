@@ -21,6 +21,7 @@ public class FoodController {
     @Autowired
     private FoodService foodService;
 
+
     @PostMapping
     public ApiResponse<FoodResponse> addNewFood(@RequestBody FoodRequest foodRequest) {
         return ApiResponse.<FoodResponse>builder()

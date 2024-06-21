@@ -19,7 +19,10 @@ public enum ErrorCode {
     PRICE_INVALID(1012, "Price must be greater than 0", HttpStatus.BAD_REQUEST),
     PASSWORD_NOT_MATCHER(1013,"Please enter correct old password", HttpStatus.BAD_REQUEST),
     PASSWORD_NOT_MATCH(1013,"Do not match. Please enter correct password", HttpStatus.BAD_REQUEST),
-    OTP_INVALID(1014,"OTP invalid. Try again" ,HttpStatus.BAD_REQUEST );
+    OTP_INVALID(1014,"OTP invalid. Try again" ,HttpStatus.BAD_REQUEST ),
+    COMBO_NOT_EXIST(1015, "Combo not exist", HttpStatus.BAD_REQUEST),
+    OPEN_DATE_INVALID(1016, "Open date must be in the future", HttpStatus.BAD_REQUEST),
+    END_DATE_INVALID(1017, "End date invalid", HttpStatus.BAD_REQUEST);
     private int code;
     private String message;
     private HttpStatusCode statusCode;
