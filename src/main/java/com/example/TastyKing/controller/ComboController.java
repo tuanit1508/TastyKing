@@ -4,6 +4,7 @@ import com.example.TastyKing.dto.request.ComboRequest;
 import com.example.TastyKing.dto.request.UpdateComboRequest;
 import com.example.TastyKing.dto.response.ApiResponse;
 import com.example.TastyKing.dto.response.ComboResponse;
+import com.example.TastyKing.dto.response.FoodResponse;
 import com.example.TastyKing.entity.Combo;
 import com.example.TastyKing.service.ComboService;
 import jakarta.validation.Valid;
@@ -50,5 +51,19 @@ public class ComboController {
         return ApiResponse.<ComboResponse>builder()
                 .result(comboService.updateCombo(comboID, updateComboRequest))
                 .build();
+    }
+
+    @GetMapping("getCombo/{comboID}")
+    public ApiResponse<ComboResponse> getComboByComboID(@PathVariable("comboID") Long comboID){
+        return ApiResponse.<ComboResponse>builder()
+                .result(comboService.getComboByID(comboID))
+                .build();
+    }
+    @GetMapping("getComboFood/{comboID}")
+    public ApiResponse<List<FoodResponse>> getFoodByComboID(@PathVariable("comboID") Long comboID){
+        return ApiResponse.<List<FoodResponse>>builder()
+                .result(comboService.getFoodByComboID(comboID))
+                .build();
+
     }
 }
