@@ -2,6 +2,7 @@ package com.example.TastyKing.service;
 
 import com.example.TastyKing.dto.request.ComboRequest;
 import com.example.TastyKing.dto.request.UpdateComboRequest;
+import com.example.TastyKing.dto.response.ComboFoodResponse;
 import com.example.TastyKing.dto.response.ComboResponse;
 import com.example.TastyKing.dto.response.FoodResponse;
 import com.example.TastyKing.entity.Combo;
@@ -72,12 +73,9 @@ public class ComboService {
         return comboMapper.toComboResponse(existingCombo);
     }
 
-    public List<FoodResponse> getFoodByComboID(Long comboID) {
-        Combo existingCombo = comboRepository.findById(comboID)
-                .orElseThrow(() -> new AppException(ErrorCode.COMBO_NOT_EXIST));
-        return existingCombo.getComboFoods().stream()
-                .map(comboFood -> comboMapper.toFoodResponse(comboFood.getFood(), comboFood.getQuantity()))
-                .collect(Collectors.toList());
+    public List<ComboFoodResponse> getFoodInCombo(Long comboID) {
+        return comboMapper.getFoodFromCombo(comboID);
     }
+
 
 }

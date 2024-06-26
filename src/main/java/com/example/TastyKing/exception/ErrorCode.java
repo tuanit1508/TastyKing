@@ -22,7 +22,11 @@ public enum ErrorCode {
     OTP_INVALID(1014,"OTP invalid. Try again" ,HttpStatus.BAD_REQUEST ),
     COMBO_NOT_EXIST(1015, "Combo not exist", HttpStatus.BAD_REQUEST),
     OPEN_DATE_INVALID(1016, "Open date must be in the future", HttpStatus.BAD_REQUEST),
-    END_DATE_INVALID(1017, "End date invalid", HttpStatus.BAD_REQUEST);
+    END_DATE_INVALID(1017, "End date invalid", HttpStatus.BAD_REQUEST),
+    POSITION_EXISTED(1018,"Position has existed" , HttpStatus.BAD_REQUEST ),
+    POSITION_NOT_EXIST(1019, "Position has not exist",HttpStatus.BAD_REQUEST ),
+    INVALID_NUM_OF_CHAIR(1020, "Number of chair must be at least 2 chairs", HttpStatus.BAD_REQUEST),
+    TABLE_NOT_EXIST(1021,"Table has not exist" ,HttpStatus.BAD_REQUEST );
     private int code;
     private String message;
     private HttpStatusCode statusCode;

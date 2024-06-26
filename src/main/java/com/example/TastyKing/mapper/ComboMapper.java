@@ -12,15 +12,18 @@ import com.example.TastyKing.entity.ComboFoodId;
 import com.example.TastyKing.entity.Food;
 import com.example.TastyKing.exception.AppException;
 import com.example.TastyKing.exception.ErrorCode;
+import com.example.TastyKing.repository.ComboRepository;
 import com.example.TastyKing.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class ComboMapper {
-
+    @Autowired
+    private  ComboRepository comboRepository;
     @Autowired
     private FoodRepository foodRepository;
 
@@ -116,6 +119,12 @@ public class ComboMapper {
                 .foodImage3(food.getFoodImage3())
                 .build();
     }
-
+    public List<ComboFoodResponse> getFoodFromCombo(Long comboID) {
+        Combo combo = comboRepository.findById(comboID)
+                .orElseThrow(() -> new AppException(ErrorCode.COMBO_NOT_EXIST));
+        return combo.getComboFoods().stream()
+                .map(this::toComboFoodResponse)
+                .collect(Collectors.toList());
+    }
 
 }
