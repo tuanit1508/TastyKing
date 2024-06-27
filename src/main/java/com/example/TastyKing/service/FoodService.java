@@ -11,7 +11,7 @@ import com.example.TastyKing.exception.ErrorCode;
 import com.example.TastyKing.mapper.FoodMapper;
 import com.example.TastyKing.repository.CategoryRepository;
 import com.example.TastyKing.repository.FoodRepository;
-import com.example.TastyKing.request.FoodUpdateRequest;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -55,10 +55,13 @@ public class FoodService {
                     .map(foodMapper::toFoodResponse)
                     .collect(Collectors.toList());
         }
+    @PreAuthorize("hasRole('ADMIN')")
         public String deleteFood(Long foodID){
             foodRepository.deleteById(foodID);
             return "Deleted successfull";
         }
+
+    @PreAuthorize("hasRole('ADMIN')")
         public FoodResponse updateFood(Long foodID, UpdateFoodRequest request) {
             Food food = foodRepository.findById(foodID).orElseThrow(() ->
                     new AppException(ErrorCode.FOOD_NOT_EXIST));

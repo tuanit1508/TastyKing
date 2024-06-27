@@ -26,7 +26,9 @@ public enum ErrorCode {
     POSITION_EXISTED(1018,"Position has existed" , HttpStatus.BAD_REQUEST ),
     POSITION_NOT_EXIST(1019, "Position has not exist",HttpStatus.BAD_REQUEST ),
     INVALID_NUM_OF_CHAIR(1020, "Number of chair must be at least 2 chairs", HttpStatus.BAD_REQUEST),
-    TABLE_NOT_EXIST(1021,"Table has not exist" ,HttpStatus.BAD_REQUEST );
+    TABLE_NOT_EXIST(1021,"Table has not exist" ,HttpStatus.BAD_REQUEST ),
+    VOUCHER_NOT_EXIST(1022,"Voucher has not exist" ,HttpStatus.BAD_REQUEST ),
+    VOUCHER_HAS_EXISTED(1023,"Voucher has existed" ,HttpStatus.BAD_REQUEST );
     private int code;
     private String message;
     private HttpStatusCode statusCode;

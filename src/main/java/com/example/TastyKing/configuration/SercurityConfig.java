@@ -26,7 +26,8 @@ public class SercurityConfig {
     private final String[] PUBLIC_ENDPOINTS ={"/users/register","/users/verify-account", "/users/sendOTP", "/users/verify-email",
             "/users/regenerate-otp","/auth/login", "/category", "/food",
             "/food/{categoryID}", "/food/getFood/{foodID}",
-            "/combo", "/combo/getCombo/{comboID}", "/table-position", "/table/{tablePositionID}"
+            "/combo", "/combo/getCombo/{comboID}", "/table-position", "/table/{tablePositionID}",
+            "/voucher", "/voucher/{voucherID}"
     };
 
     private String signature ="OG3aRIYXHjOowyfI2MOHbl8xSjoF/B/XwkK6b276SfXAhL3KbizWWuT8LB1YUVvh";

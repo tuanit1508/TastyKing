@@ -29,7 +29,7 @@ public class TableService {
     @Autowired
     private TablePositionRepository tablePositionRepository;
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     public TableResponse createNewTable(TableRequest tableRequest){
         Tables tables = tableMapper.toTable(tableRequest);
         TablePosition tablePosition = tablePositionRepository.findById(tableRequest.getTablePosition().getTablePositionID())
